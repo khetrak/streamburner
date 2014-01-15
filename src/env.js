@@ -9,13 +9,12 @@ var Env = function() {
 	this.has_body = false;
 }
 Env.prototype.detect = function() {
+	var loc = document.URL.toLowerCase();
+	logger.log("Detecting environment",loc);
 	if(!window.jQuery) {
 		logger.log("Aborting load -- jQuery isn't here, so this page probably isn't content");
 		return false;
 	}
-
-	var loc = document.URL.toLowerCase();
-	logger.log("CALL init",loc);
 	if(loc.indexOf("meebo.html") != -1) {
 		logger.log("BetterJTV Load Aborted - Meebo Frame");
 		return false;
