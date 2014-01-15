@@ -13,4 +13,4 @@ npm run build
 ```
 
 Output will be available in the dist/ directory, in raw and minified format. You can edit
-the userscript extension to load your StreamBurner from your own URL for testing.
+the userscript extension to load StreamBurner from your own URL for testing.
