@@ -1,10 +1,8 @@
-var $ = require('../jquery'),
-	env = require('../env'),
-	logger = require('../logger');
+var $ = require('../../jquery'),
+	env = require('../../env'),
+	logger = require('../../logger');
 
 module.exports = function() {
-	if(env.is_twitch) return;
-
 	var $optUl = $('.player-options > ul').first();
 	if(!$optUl.length) return;
 

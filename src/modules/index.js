@@ -1,5 +1,6 @@
 module.exports = {
-	'add_midnight_mode': require('./add_midnight_mode'),
+	'justin/add_pro_midnight_mode': require('./justin/add_pro_midnight_mode'),
+	'justin/pretty_directory': require('./justin/pretty_directory'),
 	'brand': require('./brand'),
 	'chat/emotes': require('./chat/emotes'),
 	'chat/moderator': require('./chat/moderator'),
@@ -8,7 +9,6 @@ module.exports = {
 	'clearout': require('./clearout'),
 	'firefox_update': require('./firefox_update'),
 	'over18_bypass': require('./over18_bypass'),
-	'pretty_directory': require('./pretty_directory'),
 	'pro_upgrader': require('./pro_upgrader'),
 	'reduce_title': require('./reduce_title')
 };

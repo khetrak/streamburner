@@ -20,8 +20,10 @@ if(env.has_body) {
 	Util.attemptModule('over18_bypass');
 	Util.attemptModule('reduce_title');
 	Util.attemptModule('firefox_update');
-	Util.attemptModule('add_midnight_mode');
-	if(!env.is_twitch) Util.attemptModule('pretty_directory');
+	if(!env.is_twitch) {
+		Util.attemptModule('justin/pretty_directory');
+		Util.attemptModule('justin/add_pro_midnight_mode');
+	}
 }
 if(env.has_chat) {
 	Util.attemptModule('chat/resize');
