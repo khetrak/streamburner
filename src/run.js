@@ -3,36 +3,7 @@ var logger = require('./logger'),
 	$ = require('./jquery'),
 	env = require('./env');
 
-console.log('jQuery',$);
-
-env.is_twitch = false;
-env.has_chat = false;
-env.has_body = false;
-
-logger.log("CALL init");
-var loc = document.URL.toLowerCase();
-if(loc.indexOf("meebo.html") != -1) {
-	logger.log("BetterJTV Load Aborted - Meebo Frame");
-	return;
-}
-
-env.is_twitch = false;
-if(loc.match("^http:\/\/[^\/]*twitch\.tv\/")) {
-	env.is_twitch = true;
-	logger.log("Detected Twitch.TV");
-}
-
-env.has_chat = false;
-if($("#chat_lines").length) {
-	env.has_chat = true;
-	logger.log("Detected chat");
-}
-
-env.has_body = true;
-if(loc.indexOf("/chat/embed") != -1) {
-	env.has_body = false;
-	logger.log("Detected missing body");
-}
+logger.log('Running with jQuery',$);
 
 /*
 var betterjtv_stat = document.createElement('script');

@@ -1,8 +1,8 @@
 var logger = require('./logger'),
-	jquery = require('./jquery');
+	jquery = require('./jquery'),
+	env = require('./env');
 
-if(!window.jQuery) {
-	logger.log("Aborting load -- jQuery isn't here, so this page probably isn't content");
+if(!env.detect()) {
 	return;
 }
 

@@ -1,5 +1,6 @@
 var logger = require('../../logger'),
-	env = require('../../env');
+	env = require('../../env'),
+	Util = require('../../util');
 
 var smile_base = 'http://run.betterjtv.com/emotes/';
 var smile_list = [
@@ -40,23 +41,22 @@ function smilize_post(message)
 		var filename = smile_list[i][1];
 		if(filename.indexOf('.') == -1) filename = filename+'.png';
 		var url = smile_base+filename;
-		message = replaceAll(message, '___bjtv_emote_'+i+'___', '<img src="'+url+'">');
+		message = Util.replaceAll(message, '___bjtv_emote_'+i+'___', '<img src="'+url+'">');
 	}
 	return message;
 }
 
 module.exports = function() {
 	var emoticonize_old = Chat.prototype.emoticonize;
-	Chat.prototype.emoticonize = function(msg) {
-	//		msg = replaceAll(msg, "<wbr />", "");
-		msg = smilize_pre(msg);
-		msg = emoticonize_old.call(this,msg);
-		msg = smilize_post(msg);
-	//		msg = "<span style=\"word-wrap: break-word;\">"+msg+"</span>";
-	//		logger.log(msg);
-	//		if(env.is_twitch) {
-	//			msg = msg.replace(/<span class="emo-([a-z0-9]*)"><\/span>/g, "<img src=\"http://www-cdn.jtvnw.net/images/emoticons/$1.gif\"/>");
-	//		}
-		return msg;
+	Chat.prototype.emoticonize = function(orig) {
+		try {
+			var msg = smilize_pre(orig);
+			msg = emoticonize_old.call(this,msg);
+			msg = smilize_post(msg);
+			return msg;
+		} catch(e) {
+			logger.error('Emoticonize exception',e.stack);
+		}
+		return emoticonize_old.call(this,orig);
 	}
 }
