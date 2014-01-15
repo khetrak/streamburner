@@ -1,7 +1,8 @@
 module.exports = {
+	'add_midnight_mode': require('./add_midnight_mode'),
 	'brand': require('./brand'),
 	'chat/emotes': require('./chat/emotes'),
-	'chat/moderater': require('./chat/moderater'),
+	'chat/moderator': require('./chat/moderator'),
 	'chat/resize': require('./chat/resize'),
 	'chat/settings': require('./chat/settings'),
 	'clearout': require('./clearout'),
