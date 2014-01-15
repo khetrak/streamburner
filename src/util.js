@@ -1,8 +1,10 @@
 var $ = require('./jquery'),
-	logger = require('./logger'),
-	Modules = require('./modules/index');
+	logger = require('./logger');
 
-module.exports = {
+// lazy load to prevent dependency loop
+var modules = false;
+
+var Util = {
 	bhook: function(hooklist) {
 		var results = {};
 		$.each(hooklist, function(key,search) {
@@ -27,12 +29,17 @@ module.exports = {
 	attempt: function(name,func) {
 		try {
 			logger.log('Running '+name);
-			func.call(undefined);
+			func.call();
 		} catch(e) {
-			logger.error('Caught error'+e);
+			logger.error('Caught error',e.stack);
 		}
 	},
 	attemptModule: function(name) {
-		attempt(name,Modules[name]);
+		if(modules === false) {
+			modules = require('./modules/index');
+		}
+		Util.attempt(name,modules[name]);
 	}
 };
+
+module.exports = Util;

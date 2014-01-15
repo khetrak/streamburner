@@ -1,3 +1,6 @@
+var logger = require('../logger'),
+	$ = require('../jquery');
+
 module.exports = function() {
 	// tweak globals
 	if(typeof PP != "undefined") {
@@ -21,7 +24,7 @@ module.exports = function() {
 		var newval = oldval.replace("&pro=false","&pro=true");
 		if(newval.indexOf('&pro=true') == -1) newval += '&pro=true';
 		if(oldval != newval) {
-			bdebug.log("Updating player flashvars to",newval);
+			logger.log("Updating player flashvars to",newval);
 			$fv.val(newval);
 			var $parent = $(this).parent();
 			$(this).remove().appendTo($parent);

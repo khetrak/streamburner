@@ -1,33 +1,37 @@
 var logger = require('./logger'),
-	Util = require('./util');
+	Util = require('./util'),
+	$ = require('./jquery'),
+	env = require('./env');
 
-var is_twitch = false;
-var has_chat = false;
-var has_body = false;
+console.log('jQuery',$);
 
-bdebug.log("CALL init");
+env.is_twitch = false;
+env.has_chat = false;
+env.has_body = false;
+
+logger.log("CALL init");
 var loc = document.URL.toLowerCase();
 if(loc.indexOf("meebo.html") != -1) {
-	bdebug.log("BetterJTV Load Aborted - Meebo Frame");
+	logger.log("BetterJTV Load Aborted - Meebo Frame");
 	return;
 }
 
-is_twitch = false;
+env.is_twitch = false;
 if(loc.match("^http:\/\/[^\/]*twitch\.tv\/")) {
-	is_twitch = true;
-	bdebug.log("Detected Twitch.TV");
+	env.is_twitch = true;
+	logger.log("Detected Twitch.TV");
 }
 
-has_chat = false;
-if(document.getElementById("chat_lines")) {
-	has_chat = true;
-	bdebug.log("Detected chat");
+env.has_chat = false;
+if($("#chat_lines").length) {
+	env.has_chat = true;
+	logger.log("Detected chat");
 }
 
-has_body = true;
+env.has_body = true;
 if(loc.indexOf("/chat/embed") != -1) {
-	has_body = false;
-	bdebug.log("Detected missing body");
+	env.has_body = false;
+	logger.log("Detected missing body");
 }
 
 /*
@@ -38,28 +42,28 @@ var betterjtv_head = document.getElementsByTagName("head")[0];
 if(betterjtv_head) betterjtv_head.appendChild(betterjtv_stat);
 */
 
-if(has_body) {
+if(env.has_body) {
 	Util.attemptModule('clearout');
 	Util.attemptModule('brand');
 	Util.attemptModule('pro_upgrader');
 	Util.attemptModule('over18_bypass');
 	Util.attemptModule('reduce_title');
 	Util.attemptModule('firefox_update');
-	if(!is_twitch) Util.attemptModule('pretty_directory');
+	if(!env.is_twitch) Util.attemptModule('pretty_directory');
 }
-if(has_chat) {
+if(env.has_chat) {
 	Util.attemptModule('chat/resize');
 	Util.attemptModule('chat/moderater');
 	Util.attemptModule('chat/emotes');
 }
 
 setTimeout(function() {
-	bdebug.log("CALL delayed");
-	if(has_body) {
+	logger.log("CALL delayed");
+	if(env.has_body) {
 		Util.attemptModule('clearout');
 		Util.attemptModule('pro_upgrader');
 	}
-	if(has_chat && !is_twitch) {
+	if(env.has_chat && !env.is_twitch) {
 		Util.attemptModule('chat/settings');
 	}
 },1000);

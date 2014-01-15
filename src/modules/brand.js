@@ -1,3 +1,6 @@
+var $ = require('../jquery'),
+	env = require('../env');
+
 function cstroke(color, size)
 {
 	return ''
@@ -9,7 +12,7 @@ function cstroke(color, size)
 module.exports = function() {
 	var $logo;
 	var newTwitch = false;
-	if(is_twitch) {
+	if(env.is_twitch) {
 		$logo = $('#header_logo');
 		if(!$logo.length) {
 			newTwitch = true;
@@ -29,7 +32,7 @@ module.exports = function() {
 		'font-family': 'arial',
 		'text-decoration': 'none'
 	});
-	if(is_twitch) {
+	if(env.is_twitch) {
 		if(newTwitch) {
 			$watermark.css({
 				top: '18px',

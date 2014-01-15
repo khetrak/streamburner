@@ -1,3 +1,5 @@
+var $ = require('../jquery');
+
 module.exports = function() {
 	if(navigator.userAgent.toLowerCase().indexOf('firefox') == -1) return;
 	if($('#localffbetterjtv').length) return;

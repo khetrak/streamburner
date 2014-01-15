@@ -1,35 +1,13 @@
+var $ = require('../../jquery'),
+	env = require('../../env'),
+	Util = require('../../util');
+
 module.exports = function() {
-	if(is_twitch) {
-		if(has_body) {
-			var chatboxheight = 550;
-
-			var hooks = bhook({
-				chat_lines: '#chat_lines',
-				chat_column: '#chat_column',
-				main: '.main',
-				wrapper: '.wrapper'
-			});
-			
-			var has_header = !!$('#header_banner');
-
-			hooks['chat_lines'].style.height="430px";
-			hooks['chat_lines'].style.maxHeight="";
-			hooks['chat_lines'].style.marginTop = has_header ? "130px" : "-12px";
-			hooks['chat_column'].style.width="400px";
-			hooks['main'].style.width="1080px";
-			hooks['wrapper'].style.width='auto';
-		}
-
-		var hooks = bhook({
-			chat_line_list: '#chat_line_list',
-		});
-
-		hooks['chat_line_list'].style.width="auto";
-	} else {
+	if(!env.is_twitch) {
 		var height = 400;
 		var width = 390;
 
-		var hooks = bhook({
+		var hooks = Util.bhook({
 			wrapper: '.wrapper',
 			chat_column: '.chat_column',
 

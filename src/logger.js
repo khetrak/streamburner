@@ -6,8 +6,9 @@ for(var i = 0; i < logtypes.length; i++) {
 		if(!window.console) return;
 		if(!console[type]) return;
 		var args = Array.prototype.slice.apply(arguments);
+		args.unshift(type);
 		args.unshift("BetterJTV");
-		console[type].apply(console,args);
+		console.log.apply(console,args);
 	};
 })(logtypes[i]);
 }

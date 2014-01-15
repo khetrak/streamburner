@@ -1,3 +1,5 @@
+var $ = require('../jquery');
+
 module.exports = function() {
 	var $inputs = $('input');
 	$inputs.each(function(k,input) {

@@ -1,3 +1,5 @@
+var $ = require('../jquery');
+
 module.exports = function() {
 	var featured = $('.directory-most-viewed-channels .directory-channel').remove();
 	$('.directory-most-viewed-channels').remove();

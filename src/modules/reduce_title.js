@@ -1,12 +1,14 @@
+var $ = require('../jquery'),
+	env = require('../env');
+
 module.exports = function() {
-	if(!is_twitch) return;
+	if(!env.is_twitch) return;
 	
-	var title = $('#broadcast_title');
-	if(!title) return;
-	
-	title.style.fontSize = '16px';
-	title.style.fontWeight = 'normal';
-	title.style.whiteSpace = 'nowrap';
-	title.style.textOverflow = 'ellipsis';
-	title.style.overflow = 'hidden';
+	$('#broadcast_title').css({
+		'font-size': '16px',
+		'font-weight': 'normal',
+		'white-space': 'nowrap',
+		'text-overflow': 'ellipsis',
+		'overflow': 'hidden'
+	});
 }

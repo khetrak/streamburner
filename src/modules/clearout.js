@@ -1,5 +1,8 @@
+var logger = require('../logger'),
+	$ = require('../jquery');
+
 module.exports = function() {
-	var removefooter = !(!$('#live_site_player_flash'));
+	var removefooter = $('#live_site_player_flash').length;
 
 	var clearlist = [
 		// Header
@@ -102,10 +105,10 @@ module.exports = function() {
 	$('#taboola-div').parent('.channel-section').remove();
 
 	// eat front page takeover
-	bdebug.log("Checking for takeover");
+	logger.log("Checking for takeover");
 	var $skin = $('#mantle_skin');
 	if($skin.length) {
-		$(skin).css({
+		$skin.css({
 			'background-image': 'none',
 			'background-color': 'transparent'
 		});

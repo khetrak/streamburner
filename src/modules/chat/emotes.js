@@ -1,3 +1,6 @@
+var logger = require('../../logger'),
+	env = require('../../env');
+
 var smile_base = 'http://run.betterjtv.com/emotes/';
 var smile_list = [
 	[[':trollface:',':tf:'],'trollface'],
@@ -50,8 +53,8 @@ module.exports = function() {
 		msg = emoticonize_old.call(this,msg);
 		msg = smilize_post(msg);
 	//		msg = "<span style=\"word-wrap: break-word;\">"+msg+"</span>";
-	//		bdebug.log(msg);
-	//		if(is_twitch) {
+	//		logger.log(msg);
+	//		if(env.is_twitch) {
 	//			msg = msg.replace(/<span class="emo-([a-z0-9]*)"><\/span>/g, "<img src=\"http://www-cdn.jtvnw.net/images/emoticons/$1.gif\"/>");
 	//		}
 		return msg;
