@@ -12,7 +12,7 @@ b.bundle(function(e,src) {
 		console.error(e);
 		return;
 	}
-	
+
 	var toplevel = UglifyJS.parse(src);
 	toplevel.figure_out_scope();
 	var compressor = UglifyJS.Compressor();
@@ -21,6 +21,10 @@ b.bundle(function(e,src) {
 	compressed_ast.compute_char_frequency();
 	compressed_ast.mangle_names();
 	var compressed = compressed_ast.print_to_string();
+	
+	var license = '/*! StreamBurner | (c) 2014 StreamBurner Contributors | MIT License */\n';
+	src = license+src;
+	compressed = license+compressed;
 
 	try {
 		fs.mkdirSync(base+'/dist');
