@@ -1,14 +1,6 @@
 var $ = require('../jquery'),
 	env = require('../env');
 
-function cstroke(color, size)
-{
-	return ''
-			  +size+'px  '+size+'px 0 '+color
-		+', -'+size+'px  '+size+'px 0 '+color
-		+',  '+size+'px -'+size+'px 0 '+color
-		+', -'+size+'px -'+size+'px 0 '+color;
-}
 module.exports = function() {
 	var $logo;
 	var newTwitch = false;
@@ -23,39 +15,31 @@ module.exports = function() {
 	}
 	if(!$logo) return;
 
-	$logo.css('position', 'relative');
+	var $watermark = $('<img/>')
+	.prop('src','http://run.betterjtv.com/sbflag.png')
+	.css('position', 'absolute');
 
-	var $watermark = $('<div/>').css({
-		position: 'absolute',
-		'font-weight': 'bold',
-		'font-size': '15px',
-		'font-family': 'arial',
-		'text-decoration': 'none'
-	});
+	var $logo;
 	if(env.is_twitch) {
-		if(newTwitch) {
-			$watermark.css({
-				top: '18px',
-				left: '63px',
-				'text-shadow': cstroke('#999999', 1),
-				'text-indent': 0,
-				color: 'white'
-			});
-		} else {
-			$watermark.css({
-				top: '-11px',
-				left: '-6px',
-				'text-shadow': cstroke('purple', 1),
-				color: 'white'
-			});
+		$logo = $('#header_logo');
+		if($logo.length) {
+			$logo.css('position','relative');
+			$watermark.css({ top: '-12px', left: '-5px', width: '15px' }).prependTo('#header_logo');
+			return;
+		}
+
+		$logo = $('#logo');
+		if($logo.length) {
+			$watermark.css({ top: '12px', left: '64px', width: '15px' }).prependTo('.top');
+			return;
 		}
 	} else {
-		$watermark.css({
-			top: '2px',
-			left: '-8px',
-			color: 'red',
-			'text-indent': 0
-		});
+		$logo = $('.global-header-logo');
+		if($logo.length) {
+			$watermark.css({ top: '2px', left: '-4px', width: '15px' }).prependTo('.global-header-wrapper');
+			return;
+		}
 	}
-	$watermark.text('Better').appendTo($logo);
+	
+	throw Error('Logo not found');
 }
