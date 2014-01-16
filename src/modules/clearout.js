@@ -74,8 +74,7 @@ module.exports = function() {
 		 // Related Channels
 //		"#related",
 		".details .apps", // "watch on ipad, iphone, etc"
-		"#api_tab .fb-share-button", // facebook share button
-		"#api_tab #twitter_share_button", // twitter share button
+		".channel_status_tabs #api_tab", // facebook and twitter share buttons
 
 		// Old Channels
 		 // Left Side Containers

@@ -3,7 +3,7 @@ var $ = require('../jquery');
 module.exports = function() {
 	var $inputs = $('input');
 	$inputs.each(function(k,input) {
-		if(input.value == "I am 18 or older") {
+		if(input.name == 'over_18' && input.value == "Continue Anyway") {
 			input.click();
 			return false;
 		}
