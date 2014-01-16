@@ -2,8 +2,6 @@ var logger = require('../logger'),
 	$ = require('../jquery');
 
 module.exports = function() {
-	var removefooter = $('#live_site_player_flash').length;
-
 	var clearlist = [
 		// Header
 //		"#header_site_search",
@@ -24,7 +22,6 @@ module.exports = function() {
 		
 		// Footer
 		"#footer_search",
-		"#footer_columns_container",
 //		".meebo-215", // m_ad
 		".footer_ad",
 		".bottom-leaderboard-adslot",
@@ -96,7 +93,6 @@ module.exports = function() {
 
 	$.each(clearlist, function(k,search) {
 		if(search == '') return;
-		if(search == "footer_columns_container" && !removefooter) return;
 		$(search).remove();
 	});
 	
