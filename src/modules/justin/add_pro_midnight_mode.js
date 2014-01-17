@@ -32,9 +32,11 @@ var j = $;
 function toggleMidnightMode() {
 	midnightMode = !midnightMode;
 	if (midnightMode) {
-		if (j('body').css('background-image') == 'none') {
+		// StreamBurner -- ALWAYS make background dark, even if there's an image
+		//if (j('body').css('background-image') == 'none') {
 			j('body').addClass('midnight_mode_body');
-		}
+			j('body').css('background-image','none');
+		//}
 		j('.channel-description, .channel-section, .chat_column, .chat_text_inverse, .dropmenu_links_container, .player-options li').addClass('midnight_mode_containers');
 		j('.dropmenu_links_container').addClass('midnight_mode_container_border');
 		j('li.fromjtv, #chat_text_input, .channel_status').addClass('midnight_mode_wrapper');
@@ -72,6 +74,8 @@ function toggleMidnightMode() {
 		j('.player-options').hide();
 		j("#about_me_container").contents().find('.ugc_html').addClass('midnight_mode_containers');
 	} else {
+		// StreamBurner -- Disable background image removal
+		j('body').css('background-image','');
 		j('body').removeClass('midnight_mode_body');
 		j('.channel-description, .channel-section, .chat_column, .chat_text_inverse, .dropmenu_links_container, .player-options li').removeClass('midnight_mode_containers');
 		j('.dropmenu_links_container').removeClass('midnight_mode_container_border');
