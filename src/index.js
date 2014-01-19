@@ -2,13 +2,14 @@ var logger = require('./logger'),
 	jquery = require('./jquery'),
 	env = require('./env');
 
-if(!env.detect()) {
-	return;
-}
+if(!env.detect()) return;
 
 jquery.load(function($) {
 	function documentReady() {
-		logger.log("Document is ready, waiting one tick");
+		logger.log("Document is ready");
+		if(!env.detectOnReady()) return;
+
+		logger.log("Sleeping for one tick");
 		setTimeout(function() {
 			require('./run');
 		},0);
