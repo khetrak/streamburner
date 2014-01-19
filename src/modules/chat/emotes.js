@@ -2,7 +2,7 @@ var logger = require('../../logger'),
 	env = require('../../env'),
 	Util = require('../../util');
 
-var smile_base = 'http://run.betterjtv.com/emotes/';
+var smile_base = 'https://run.streamburner.net/emotes/';
 var smile_list = [
 	[[':trollface:',':tf:'],'trollface'],
 	['D:','aww'],

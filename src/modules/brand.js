@@ -16,7 +16,7 @@ module.exports = function() {
 	if(!$logo) return;
 
 	var $watermark = $('<img/>')
-	.prop('src','http://run.betterjtv.com/sbflag.png')
+	.prop('src','https://run.streamburner.net/sbflag.png')
 	.css('position', 'absolute');
 
 	var $logo;
