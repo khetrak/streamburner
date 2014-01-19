@@ -26,7 +26,7 @@ if(env.has_body) {
 	}
 }
 if(env.has_chat) {
-	Util.attemptModule('chat/resize');
+	if(!env.is_twitch) Util.attemptModule('chat/resize');
 	Util.attemptModule('chat/moderator');
 	Util.attemptModule('chat/emotes');
 }
