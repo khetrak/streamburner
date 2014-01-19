@@ -2,11 +2,10 @@ var logger = require('../logger'),
 	$ = require('../jquery');
 
 module.exports = function() {
+	console.log("jQuery",$);
 	var clearlist = [
-		// Header
-//		"#header_site_search",
+		// Obvious Advertising
 		".managed_ad",
-		"#FrontPageMedRectv2",
 		"#fp_ad",
 		"#ad",
 		".ad_300x250",
@@ -16,79 +15,36 @@ module.exports = function() {
 		"#FPTakeoverHeaderV3_holder",
 		"#psAdsUrlGetter",
 		"#ad_iframe",
+		"#FrontPageMedRectv2",
 		".a300",
 		"#adDiv",
 		".fp_ad",
-		
-		// Footer
-		"#footer_search",
-//		".meebo-215", // m_ad
+		".directory-house-ad",
 		".footer_ad",
 		".bottom-leaderboard-adslot",
 		"#ad_holder",
-		
-		// iPhone Ads
-		"#frontpage_takeover_banner",
-		"#iphone_banner",
-		'#iphone_banner_in',
-		
-		// Front page
-		"#things_todo",
-		"#fp-categories",
-		"#portal_headlines",
-		"#search_tags",
-		".fp-section_desc",
 		".frontpage-right-ad-hide",
-		".frontpage-banner",
 		".frontpage-header-ad",
 		".advertisement",
+		".directory-left-ad",
+		".frontpage-right-ad",
+		".dashboard-house-ad",
+		".directory-pro-banner-wrapper",
 		
-		// Home
-//		".home_search",
-		".home_action_separator",
-		"#home_actions_less",
-		"#home-new_gifts",
-//		"#home_fans",
-		"#callout",
-		".frontpage-social-block",
-		
-		"#advanced_callout", // advanced broadcast options on top of homepage
-		"#go_pro_link",
-		"#HomePageMedRect_holder", // under gopro
+		// Used for advertising at some point
+		".iphone_banner", // google ads at top of directory page
+
+		// Front page
+		".frontpage-banner", // GIANT MAIN banner that pretty much just shows ads
+		".frontpage-social-block", // facebook and twitter buttons
 		
 		// Directory
-		"#producer_spotlight_holder",
-		"#app_spotlight",
-		".directory-title",
-		".directory-player",
-		
+		".directory-title", // part 1 of "featured video" in directory
+		".directory-player", // part 2
+
 		// Channels
-		 // Header
-		"#next_live_channel",
-		"#admin_nxtchan",
-		"#channel_header",
-		"#broadcast_banner",
-		 // Related Channels
-//		"#related",
 		".details .apps", // "watch on ipad, iphone, etc"
 		".channel_status_tabs #api_tab", // facebook and twitter share buttons
-
-		// Old Channels
-		 // Left Side Containers
-		"#dvr",
-		"#channel_lists",
-		 // Channel Info Cleanup
-		".firstcolor_header",
-		".channel_info",
-		 // Right Side Containers
-		"#channel_schedule_container",
-		"#top_fans_container",
-		
-		// Gifts
-		"#channel_gifts_container",
-		"#chat_gifts",
-		"#fp-new_gifts",
-		".hint"
 	];
 
 	$.each(clearlist, function(k,search) {
