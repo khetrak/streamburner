@@ -30,7 +30,8 @@ module.exports = function() {
 
 		$logo = $('#logo');
 		if($logo.length) {
-			$watermark.css({ top: '12px', left: '64px', width: '15px' }).prependTo('.top');
+			$watermark.css({ top: '12px', left: '64px', width: '15px' });
+			$('.top').first().prepend($watermark);
 			return;
 		}
 	} else {
