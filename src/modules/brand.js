@@ -28,15 +28,13 @@ module.exports = function() {
 		}
 
 		$logo = $('#logo');
-		if($logo.length) {
-			$watermark.clone().css({ top: '12px', left: '64px', width: '15px' });
-			$('.top').first().prepend($watermark);
-		}
+		if($logo.length)
+			$watermark.clone().css({ top: '12px', left: '64px', width: '15px' }).prependTo($('.top').first());
 
 		$logo = $('#small_home');
-		if($logo.length) {
+		if($logo.length)
 			$watermark.clone().css({ top: '0px', left: '5px', width: '15px' }).prependTo('#small_home');
-		}
+
 		return;
 	} else {
 		$logo = $('.global-header-logo');
