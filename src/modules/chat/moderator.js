@@ -23,8 +23,16 @@ module.exports = function() {
 			CurrentChat.set_mod_icons_visible(true);
 	});
 
-	Util.attempt('hide_links',function() {
-		PP.channel_hide_chat_links = false;
+	Util.attempt('unhide_links',function() {
+		if(env.is_twitch) {
+			var linkify_old = Chat.prototype.linkify;
+			Chat.prototype.linkify = function() {
+				CurrentChat.channel_hide_chat_links = false;
+				return linkify_old.apply(this,arguments);
+			}
+		} else {
+			PP.channel_hide_chat_links = false;
+		}
 	});
 
 /*
@@ -80,7 +88,7 @@ module.exports = function() {
 				CurrentChat.admin_message("Chat was cleared by a moderator (prevented by BetterJTV)");
 			} else if (info.target == "user") {
 				var nickname = CurrentChat.real_username(info.user);
-				$('#chat_line_list .chat_from_' + info.user.replace(/%/g, '_').replace(/[<>,]/g, '')).css('color','#999');
+				$('#chat_line_list .chat_from_' + info.user.replace(/%/g, '_').replace(/[<>,]/g, '')).css('opacity','0.5');
 				CurrentChat.admin_message(nickname+" has been timed out");
 			}
 		}
