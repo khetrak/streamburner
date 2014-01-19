@@ -37,7 +37,7 @@ setTimeout(function() {
 		Util.attemptModule('clearout');
 		Util.attemptModule('pro_upgrader');
 	}
-	if(env.has_chat && !env.is_twitch) {
+	if(env.has_chat) {
 		Util.attemptModule('chat/settings');
 	}
 },1000);

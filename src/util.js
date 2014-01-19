@@ -3,6 +3,7 @@ var $ = require('./jquery'),
 
 // lazy load to prevent dependency loop
 var modules = false;
+var attemptShift = 0;
 
 var Util = {
 	bhook: function(hooklist) {
@@ -27,12 +28,17 @@ var Util = {
 		return str;
 	},
 	attempt: function(name,func) {
+		attemptShift++;
 		try {
-			logger.log('Running '+name);
+			var log = '';
+			for(var i = 0; i < attemptShift; i++) log += ' ';
+			log += '> '+name;
+			logger.log(log);
 			func.call();
 		} catch(e) {
 			logger.error('Caught error',e.stack);
 		}
+		attemptShift--;
 	},
 	attemptModule: function(name) {
 		if(modules === false) {
