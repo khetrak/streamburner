@@ -6,7 +6,7 @@ var smile_base = 'https://run.streamburner.net/emotes/';
 var smile_list = [
 	[[':trollface:',':tf:'],'trollface'],
 	['D:','aww'],
-	[':D','mw.jpg'],
+	[':D','awesome'],
 	[';(','cry'],
 	['(puke)','puke'],
 	['(mooning)','mooning'],
@@ -41,7 +41,7 @@ function smilize_post(message)
 		var filename = smile_list[i][1];
 		if(filename.indexOf('.') == -1) filename = filename+'.png';
 		var url = smile_base+filename;
-		message = Util.replaceAll(message, '___bjtv_emote_'+i+'___', '<img src="'+url+'">');
+		message = Util.replaceAll(message, '___bjtv_emote_'+i+'___', '<img style="margin: -5px 0;" src="'+url+'">');
 	}
 	return message;
 }
@@ -51,12 +51,14 @@ module.exports = function() {
 	Chat.prototype.emoticonize = function(orig) {
 		try {
 			var msg = smilize_pre(orig);
-			msg = emoticonize_old.call(this,msg);
+			var args = Array.prototype.slice.apply(arguments);
+			args[0] = msg;
+			msg = emoticonize_old.apply(this,args);
 			msg = smilize_post(msg);
 			return msg;
 		} catch(e) {
 			logger.error('Emoticonize exception',e.stack);
 		}
-		return emoticonize_old.call(this,orig);
+		return emoticonize_old.apply(this,arguments);
 	}
 }
