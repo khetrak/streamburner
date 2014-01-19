@@ -11,7 +11,6 @@ module.exports = {
 
 	'brand': require('./brand'),
 	'clearout': require('./clearout'),
-	'firefox_update': require('./firefox_update'),
 	'over18_bypass': require('./over18_bypass'),
 	'pro_upgrader': require('./pro_upgrader'),
 	'reduce_title': require('./reduce_title')

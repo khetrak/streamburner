@@ -19,7 +19,6 @@ if(env.has_body) {
 	Util.attemptModule('pro_upgrader');
 	Util.attemptModule('over18_bypass');
 	Util.attemptModule('reduce_title');
-	Util.attemptModule('firefox_update');
 	if(!env.is_twitch) {
 		Util.attemptModule('justin/pretty_directory');
 		Util.attemptModule('justin/add_pro_midnight_mode');
