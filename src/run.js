@@ -30,6 +30,7 @@ if(env.has_chat) {
 	Util.attemptModule('chat/moderator');
 	Util.attemptModule('chat/emotes');
 }
+if(env.is_twitch) Util.attemptModule('twitch/dark_mode');
 
 setTimeout(function() {
 	logger.log("CALL delayed");
