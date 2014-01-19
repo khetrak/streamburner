@@ -24,16 +24,20 @@ module.exports = function() {
 		$logo = $('#header_logo');
 		if($logo.length) {
 			$logo.css('position','relative');
-			$watermark.css({ top: '-12px', left: '-5px', width: '15px' }).prependTo('#header_logo');
-			return;
+			$watermark.clone().css({ top: '-12px', left: '-5px', width: '15px' }).prependTo('#header_logo');
 		}
 
 		$logo = $('#logo');
 		if($logo.length) {
-			$watermark.css({ top: '12px', left: '64px', width: '15px' });
+			$watermark.clone().css({ top: '12px', left: '64px', width: '15px' });
 			$('.top').first().prepend($watermark);
-			return;
 		}
+
+		$logo = $('#small_home');
+		if($logo.length) {
+			$watermark.clone().css({ top: '0px', left: '5px', width: '15px' }).prependTo('#small_home');
+		}
+		return;
 	} else {
 		$logo = $('.global-header-logo');
 		if($logo.length) {
