@@ -17,19 +17,39 @@ if(env.has_body) {
 	Util.attemptModule('clearout');
 	Util.attemptModule('brand');
 	Util.attemptModule('pro_upgrader');
-	Util.attemptModule('over18_bypass');
-	Util.attemptModule('reduce_title');
 	if(!env.is_twitch) {
+		Util.attemptModule('over18_bypass');
+		Util.attemptModule('reduce_title');
 		Util.attemptModule('justin/pretty_directory');
 		Util.attemptModule('justin/add_pro_midnight_mode');
 	}
 }
-if(env.has_chat) {
-	if(!env.is_twitch) Util.attemptModule('chat/resize');
-	Util.attemptModule('chat/moderator');
-	Util.attemptModule('chat/emotes');
+if(env.has_chat && !env.is_twitch) {
+
 }
-if(env.is_twitch) Util.attemptModule('twitch/dark_mode');
+if(env.is_twitch) {
+	Util.attemptModule('twitch/dark_mode');
+	function chatLoaded() {
+		Util.attemptModule('chat/moderator');
+		Util.attemptModule('chat/emotes');
+	}
+	if(Twitch.chat.isLoaded()) {
+		chatLoaded();
+	} else {
+		var oldLoad = Twitch.chat.load;
+		Twitch.chat.load = function() {
+			oldLoad.apply(this,arguments);
+			chatLoaded();
+		};
+	}
+} else {
+	if(env.has_chat) {
+		Util.attemptModule('chat/resize');
+		Util.attemptModule('chat/moderator');
+		Util.attemptModule('chat/emotes');
+	}
+}
+
 
 setTimeout(function() {
 	logger.log("CALL delayed");
