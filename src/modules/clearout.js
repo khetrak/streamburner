@@ -30,6 +30,7 @@ module.exports = function() {
 		".frontpage-right-ad",
 		".dashboard-house-ad",
 		".directory-pro-banner-wrapper",
+		".advertisement",
 		
 		// Used for advertising at some point
 		".iphone_banner", // google ads at top of directory page
