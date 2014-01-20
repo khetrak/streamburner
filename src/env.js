@@ -15,6 +15,10 @@ Env.prototype.detect = function() {
 		logger.log("Load Aborted - Meebo Frame");
 		return false;
 	}
+	if(loc.indexOf("receiver.html") != -1) {
+		logger.log("Load Aborted - Receiver Frame");
+		return false;
+	}
 	if(loc.match(/\/about$/)) {
 		logger.log("Load Aborted - About Frame");
 		return false;
@@ -41,8 +45,10 @@ Env.prototype.detectOnReady = function() {
 		return false;
 	}
 
+	var $ = require('./jquery');
+
 	this.has_chat = false;
-	if(document.getElementById('chat_lines') !== null) {
+	if($('#chat_lines').length) {
 		this.has_chat = true;
 		logger.log("Detected chat");
 	}
