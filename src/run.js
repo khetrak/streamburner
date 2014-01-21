@@ -17,6 +17,12 @@ if(env.has_body) {
 	Util.attemptModule('clearout');
 	Util.attemptModule('brand');
 	Util.attemptModule('pro_upgrader');
+	setTimeout(function() {
+		logger.log("CALL delayed");
+		Util.attemptModule('clearout');
+		Util.attemptModule('pro_upgrader');
+	},1000);
+
 	if(!env.is_twitch) {
 		Util.attemptModule('over18_bypass');
 		Util.attemptModule('reduce_title');
@@ -32,6 +38,7 @@ if(env.is_twitch) {
 	function chatLoaded() {
 		Util.attemptModule('chat/moderator');
 		Util.attemptModule('chat/emotes');
+		Util.attemptModule('chat/settings');
 	}
 	if(Twitch.chat.isLoaded()) {
 		chatLoaded();
@@ -47,17 +54,6 @@ if(env.is_twitch) {
 		Util.attemptModule('chat/resize');
 		Util.attemptModule('chat/moderator');
 		Util.attemptModule('chat/emotes');
-	}
-}
-
-
-setTimeout(function() {
-	logger.log("CALL delayed");
-	if(env.has_body) {
-		Util.attemptModule('clearout');
-		Util.attemptModule('pro_upgrader');
-	}
-	if(env.has_chat) {
 		Util.attemptModule('chat/settings');
 	}
-},1000);
+}
