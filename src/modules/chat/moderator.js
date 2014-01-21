@@ -85,7 +85,7 @@ module.exports = function() {
 	Util.attempt('prevent_clear',function() {
 		function onClear(info) {
 			if (info.target == "all") {
-				CurrentChat.admin_message("Chat was cleared by a moderator (prevented by BetterJTV)");
+				CurrentChat.admin_message("Chat was cleared by a moderator (prevented by StreamBurner)");
 			} else if (info.target == "user") {
 				var nickname = CurrentChat.real_username(info.user);
 				$('#chat_line_list .chat_from_' + info.user.replace(/%/g, '_').replace(/[<>,]/g, '')).css('opacity','0.5');

@@ -30,7 +30,7 @@ function smilize_pre(message)
 	var split = message.split(' ');
 	for(var i = 0; i < split.length; i++) {
 		if(map.hasOwnProperty(split[i]))
-			split[i] = '___bjtv_emote_'+map[split[i]]+'___';
+			split[i] = '___sb_emote_'+map[split[i]]+'___';
 	}
 	message = split.join(' ');
 	return message;
@@ -41,7 +41,10 @@ function smilize_post(message)
 		var filename = smile_list[i][1];
 		if(filename.indexOf('.') == -1) filename = filename+'.png';
 		var url = smile_base+filename;
-		message = Util.replaceAll(message, '___bjtv_emote_'+i+'___', '<img style="margin: -5px 0;" src="'+url+'">');
+		if(env.is_twitch)
+			message = Util.replaceAll(message, '___sb_emote_'+i+'___', '<img style="margin: -5px 0;" src="'+url+'">');
+		else
+			message = Util.replaceAll(message, '___sb_emote_'+i+'___', '<img style="max-width: 22px; max-height: 22px;" src="'+url+'">');
 	}
 	return message;
 }
