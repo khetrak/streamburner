@@ -73,6 +73,7 @@ function toggleMidnightMode() {
 		j('#chat_viewers_dropmenu .drag_handle').addClass('midnight_mode_drag_handle');
 		j('.player-options').hide();
 		j("#about_me_container").contents().find('.ugc_html').addClass('midnight_mode_containers');
+		PP.midnight_mode = true;
 	} else {
 		// StreamBurner -- Disable background image removal
 		j('body').css('background-image','');
@@ -113,6 +114,7 @@ function toggleMidnightMode() {
 		j('#chat_viewers_dropmenu .drag_handle').removeClass('midnight_mode_drag_handle');
 		j('.player-options').hide();
 		j("#about_me_container").contents().find('.ugc_html').removeClass('midnight_mode_containers');
+		PP.midnight_mode = false;
 	}
 }
 
