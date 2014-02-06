@@ -31,6 +31,7 @@ module.exports = function() {
 		".dashboard-house-ad",
 		".directory-pro-banner-wrapper",
 		".advertisement",
+		".chat-ad-wrapper",
 		
 		// Used for advertising at some point
 		".iphone_banner", // google ads at top of directory page
@@ -45,7 +46,7 @@ module.exports = function() {
 
 		// Channels
 		".details .apps", // "watch on ipad, iphone, etc"
-		".channel_status_tabs #api_tab", // facebook and twitter share buttons
+		".channel-share", // facebook and twitter share buttons
 	];
 
 	$.each(clearlist, function(k,search) {

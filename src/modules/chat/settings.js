@@ -15,18 +15,14 @@ module.exports = function() {
 		});
 		$popoutAction.after($a);
 	} else {
-		var $settingsmenu = $(".dmactions");
-		if(!$settingsmenu.length) return;
-		
-		$settingsmenu.css('height','auto');
+		var $popout = $(".chat-actions #popout-chat");
+		if(!$popout.length) return;
 
-		var $div = $("<div/>").html('\
-			<p class="chat_option" id="bjtv_clear" style="cursor: pointer"> \
-				<span>Clear My Chat</span> \
-			</p> \
-		').appendTo($settingsmenu);
+		var $add = $('\
+			<a class="chat-action" href="#" id="sb_clear">Clear My Chat</a> \
+		').insertAfter($popout);
 
-		$div.find('#bjtv_clear').click(function() {
+		$add.find('#sb_clear').click(function() {
 			$('#chat_line_list').html('');
 			CurrentChat.admin_message("You cleared your own chat (StreamBurner)");
 		});

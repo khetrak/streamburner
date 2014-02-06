@@ -17,7 +17,7 @@ module.exports = function() {
 	}
 	
 	// replace jtv embed with pro version
-	var $player = $('#live_site_player_flash, #live_frontpage_player_flash');
+	var $player = $('#live_site_player_flash, #live_frontpage_player_flash, #JustinPlayer, #TwitchPlayer');
 	$player.each(function() {
 		var $fv = $(this).find('[name=flashvars]');
 		var oldval = $fv.val();
