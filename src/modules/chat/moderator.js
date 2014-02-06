@@ -85,7 +85,7 @@ module.exports = function() {
 	Util.attempt('prevent_clear',function() {
 		function onClear(info) {
 			if (info.target == "all") {
-				CurrentChat.admin_message("Chat was cleared by a moderator (prevented by StreamBurner)");
+				CurrentChat.admin_message("Chat was cleared by a moderator<br/>(prevented by StreamBurner)");
 			} else if (info.target == "user") {
 				var nickname = CurrentChat.real_username(info.user);
 				$('#chat_line_list .chat_from_' + info.user.replace(/%/g, '_').replace(/[<>,]/g, '')).css('opacity','0.5');
@@ -98,10 +98,5 @@ module.exports = function() {
 		} else {
 			CurrentChat.handlers.clear_chat = function(info) { onClear(info); };
 		}
-	});
-
-	// move settings back up since the ad is gone
-	Util.attempt('move_settings',function() {
-		$("#chat_settings_dropmenu").css('top','auto');
 	});
 }
