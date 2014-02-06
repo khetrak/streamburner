@@ -50,8 +50,8 @@ function smilize_post(message)
 }
 
 module.exports = function() {
-	var emoticonize_old = Chat.prototype.emoticonize;
-	Chat.prototype.emoticonize = function(orig) {
+	var emoticonize_old;
+	var emoticonize_new = function(orig) {
 		try {
 			var msg = smilize_pre(orig);
 			var args = Array.prototype.slice.apply(arguments);
@@ -63,5 +63,17 @@ module.exports = function() {
 			logger.error('Emoticonize exception',e.stack);
 		}
 		return emoticonize_old.apply(this,arguments);
+	}
+	
+	if('emoticonize' in Chat.prototype && !Chat.prototype.sbInjected) {
+		logger.log('Found emoticonize in prototype');
+		Chat.prototype.sbInjected = true;
+		emoticonize_old = Chat.prototype.emoticonize;
+		Chat.prototype.emoticonize = emoticonize_new;
+	} else if('emoticonize' in CurrentChat && !CurrentChat.sbInjected) {
+		logger.log('Found emoticonize in CurrentChat');
+		CurrentChat.sbInjected = true;
+		emoticonize_old = CurrentChat.emoticonize;
+		CurrentChat.emoticonize = emoticonize_new;
 	}
 }
