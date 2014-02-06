@@ -35,6 +35,7 @@ function toggleMidnightMode() {
 		// StreamBurner -- ALWAYS make background dark, even if there's an image
 		//if (j('body').css('background-image') == 'none') {
 			j('body').addClass('midnight_mode_body');
+			j('body').css('background-color','#000000');
 			j('body').css('background-image','none');
 		//}
 		j('.channel-description, .channel-section, .chat_column, .chat_text_inverse, .dropmenu_links_container, .player-options li').addClass('midnight_mode_containers');
@@ -76,6 +77,7 @@ function toggleMidnightMode() {
 		PP.midnight_mode = true;
 	} else {
 		// StreamBurner -- Disable background image removal
+		j('body').css('background-color','');
 		j('body').css('background-image','');
 		j('body').removeClass('midnight_mode_body');
 		j('.channel-description, .channel-section, .chat_column, .chat_text_inverse, .dropmenu_links_container, .player-options li').removeClass('midnight_mode_containers');

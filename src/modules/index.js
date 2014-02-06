@@ -1,12 +1,11 @@
 module.exports = {
-	'justin/add_pro_midnight_mode': require('./justin/add_pro_midnight_mode'),
 	'justin/pretty_directory': require('./justin/pretty_directory'),
+	'justin/style_tweaks': require('./justin/style_tweaks'),
 	
 	'twitch/dark_mode': require('./twitch/dark_mode'),
 
 	'chat/emotes': require('./chat/emotes'),
 	'chat/moderator': require('./chat/moderator'),
-	'chat/resize': require('./chat/resize'),
 	'chat/settings': require('./chat/settings'),
 
 	'brand': require('./brand'),
