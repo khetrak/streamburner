@@ -1,3 +1,5 @@
+var $ = require('../../jquery');
+
 var $darkcss = false;
 
 module.exports = function() {
