@@ -27,12 +27,12 @@ if(env.has_body) {
 		Util.attemptModule('over18_bypass');
 		Util.attemptModule('reduce_title');
 		Util.attemptModule('justin/pretty_directory');
-		Util.attemptModule('justin/add_pro_midnight_mode');
+		Util.attemptModule('justin/style_tweaks');
+		//Util.attemptModule('justin/add_pro_midnight_mode');
+		//if(env.has_chat) Util.attemptModule('justin/chat_resize');
 	}
 }
-if(env.has_chat && !env.is_twitch) {
 
-}
 if(env.is_twitch) {
 	Util.attemptModule('twitch/dark_mode');
 	function chatLoaded() {
@@ -51,9 +51,8 @@ if(env.is_twitch) {
 	}
 } else {
 	if(env.has_chat) {
-		Util.attemptModule('chat/resize');
-		Util.attemptModule('chat/moderator');
 		Util.attemptModule('chat/emotes');
+		Util.attemptModule('chat/moderator');
 		Util.attemptModule('chat/settings');
 	}
 }
