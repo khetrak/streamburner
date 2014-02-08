@@ -49,31 +49,13 @@ function smilize_post(message)
 	return message;
 }
 
-module.exports = function() {
-	var emoticonize_old;
-	var emoticonize_new = function(orig) {
-		try {
-			var msg = smilize_pre(orig);
-			var args = Array.prototype.slice.apply(arguments);
-			args[0] = msg;
-			msg = emoticonize_old.apply(this,args);
-			msg = smilize_post(msg);
-			return msg;
-		} catch(e) {
-			logger.error('Emoticonize exception',e.stack);
-		}
-		return emoticonize_old.apply(this,arguments);
-	}
-	
-	if('emoticonize' in Chat.prototype && !Chat.prototype.sbInjected) {
-		logger.log('Found emoticonize in prototype');
-		Chat.prototype.sbInjected = true;
-		emoticonize_old = Chat.prototype.emoticonize;
-		Chat.prototype.emoticonize = emoticonize_new;
-	} else if('emoticonize' in CurrentChat && !CurrentChat.sbInjected) {
-		logger.log('Found emoticonize in CurrentChat');
-		CurrentChat.sbInjected = true;
-		emoticonize_old = CurrentChat.emoticonize;
-		CurrentChat.emoticonize = emoticonize_new;
-	}
+module.exports = function(core) {
+	Util.injectChat('emoticonize', function(old,args) {
+		var str = args[0];
+		var msg = smilize_pre(str);
+		args[0] = str;
+		msg = old.apply(this,args);
+		msg = smilize_post(msg);
+		return msg;
+	});
 }

@@ -2,7 +2,6 @@ var logger = require('../logger'),
 	$ = require('../jquery');
 
 module.exports = function() {
-	console.log("jQuery",$);
 	var clearlist = [
 		// Obvious Advertising
 		".managed_ad",
@@ -60,9 +59,9 @@ module.exports = function() {
 	$('#taboola-div').parent('.channel-section').remove();
 
 	// eat front page takeover
-	logger.log("Checking for takeover");
 	var $skin = $('#mantle_skin');
 	if($skin.length) {
+		logger.log("Detected takeover ad, clearing");
 		$skin.css({
 			'background-image': 'none',
 			'background-color': 'transparent'

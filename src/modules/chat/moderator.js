@@ -64,9 +64,8 @@ module.exports = function() {
 */
 
 	Util.attempt('modify_lines',function() {
-		var insert_chat_line_old = Chat.prototype.insert_chat_line;
-		Chat.prototype.insert_chat_line=function(info)
-		{
+		Util.injectChat('insert_chat_line', function(old,args) {
+			var info = args[0];
 			if(info.tagtype == "broadcaster") info.tagname = "Host";
 			if(info.tagtype == "admin") { info.tagtype=null; info.tagname=null; }
 			if(info.tagtype == "greeter") { info.tagtype=null; info.tagname=null; }
@@ -78,8 +77,8 @@ module.exports = function() {
 			if(info.chat_type == "facebook") info.nickname = "FB-"+info.nickname;
 			if(info.chat_type == "myspace") info.nickname = "MS-"+info.nickname;
 
-			return insert_chat_line_old.call(this,info);
-		}
+			return old.apply(this,args);
+		});
 	});
 
 	Util.attempt('prevent_clear',function() {

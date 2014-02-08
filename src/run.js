@@ -5,14 +5,6 @@ var logger = require('./logger'),
 
 logger.log('Running with jQuery',$);
 
-/*
-var betterjtv_stat = document.createElement('script');
-betterjtv_stat.type = 'text/javascript';
-betterjtv_stat.src = "http://www.betterjtv.com/p/stat.php?"+Math.random();
-var betterjtv_head = document.getElementsByTagName("head")[0];
-if(betterjtv_head) betterjtv_head.appendChild(betterjtv_stat);
-*/
-
 if(env.has_body) {
 	Util.attemptModule('clearout');
 	Util.attemptModule('brand');

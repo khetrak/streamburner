@@ -17,6 +17,37 @@ var Util = {
 		});
 		return results;
 	},
+	inject: function(object,method,func) {
+		if(!(method in object)) {
+			logger.error("Failed to inject into "+method+" (method doesn't exist)");
+			return;
+		}
+		logger.log("Injecting hook into function: "+method);
+
+		var oldmethod = object[method];
+		object[method] = function() {
+			try {
+				var args = [
+					oldmethod.bind(this),
+					Array.prototype.slice.apply(arguments)
+				];
+				return func.apply(this,args);
+			} catch(e) {
+				logger.error('Exception in injected function, calling fallback',e.stack);
+				return oldmethod.apply(this,arguments);
+			}
+		};
+	},
+	injectChat: function(method,func) {
+		if(method in Chat.prototype && !('__sb_'+method in Chat.prototype)) {
+			Chat.prototype['__sb_'+method] = true;
+			Util.inject(Chat.prototype,method,func);
+		}
+		if(method in CurrentChat && !('__sb_'+method in CurrentChat)) {
+			CurrentChat['__sb_'+method] = true;
+			Util.inject(CurrentChat,method,func);
+		}
+	},
 	replaceAll: function(str, s1, s2) {
 		return str.split(s1).join(s2);
 	},
