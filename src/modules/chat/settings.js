@@ -11,20 +11,26 @@ module.exports = function() {
 		$a.click(function(e) {
 			e.preventDefault();
 			$('#chat_line_list').html('');
+			CurrentChat.line_count = 0;
+			CurrentChat.queue.length = 0;
 			CurrentChat.admin_message("You cleared your own chat (StreamBurner)");
 		});
 		$popoutAction.after($a);
 	} else {
-		var $popout = $(".chat-actions #popout-chat");
-		if(!$popout.length) return;
+		var $popoutAction = $(".chat-actions #popout-chat");
+		if(!$popoutAction.length) throw Error("Couldn't find popout action");
 
-		var $add = $('\
+		var $a = $('\
 			<a class="chat-action" href="#" id="sb_clear">Clear My Chat</a> \
-		').insertAfter($popout);
+		');
 
-		$add.find('#sb_clear').click(function() {
+		$a.click(function(e) {
+			e.preventDefault();
 			$('#chat_line_list').html('');
+			CurrentChat.line_count = 0;
+			CurrentChat.queue.length = 0;
 			CurrentChat.admin_message("You cleared your own chat (StreamBurner)");
 		});
+		$popoutAction.after($a);
 	}
 }
