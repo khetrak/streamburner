@@ -53,7 +53,7 @@ module.exports = function(core) {
 	Util.injectChat('emoticonize', function(old,args) {
 		var str = args[0];
 		var msg = smilize_pre(str);
-		args[0] = str;
+		args[0] = msg;
 		msg = old.apply(this,args);
 		msg = smilize_post(msg);
 		return msg;
