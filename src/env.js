@@ -48,7 +48,8 @@ Env.prototype.detectOnReady = function() {
 	var $ = require('./jquery');
 
 	this.has_chat = false;
-	if($('#chat_lines').length) {
+	logger.log($('#chat_lines,.chat-messages'));
+	if($('#chat_lines,.chat-messages').length) {
 		this.has_chat = true;
 		logger.log("Detected chat");
 	}

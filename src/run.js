@@ -27,20 +27,12 @@ if(env.has_body) {
 
 if(env.is_twitch) {
 	Util.attemptModule('twitch/dark_mode');
-	function chatLoaded() {
-		Util.attemptModule('chat/moderator');
-		Util.attemptModule('chat/emotes');
-		Util.attemptModule('chat/settings');
-	}
-	if(Twitch.chat.isLoaded()) {
-		chatLoaded();
-	} else {
-		var oldLoad = Twitch.chat.load;
-		Twitch.chat.load = function() {
-			oldLoad.apply(this,arguments);
-			chatLoaded();
-		};
-	}
+	Util.attemptModule('chat/emotes');
+
+	//function chatLoaded() {
+	//	Util.attemptModule('chat/moderator');
+	//	Util.attemptModule('chat/settings');
+	//}
 } else {
 	if(env.has_chat) {
 		Util.attemptModule('chat/emotes');
