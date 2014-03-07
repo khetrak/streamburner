@@ -25,18 +25,9 @@ if(env.has_body) {
 	}
 }
 
-if(env.is_twitch) {
+Util.attemptModule('chat/emotes');
+Util.attemptModule('chat/moderator');
+if(env.chat_mode === 'legacy')
+	Util.attemptModule('chat/settings');
+if(env.is_twitch)
 	Util.attemptModule('twitch/dark_mode');
-	Util.attemptModule('chat/emotes');
-
-	//function chatLoaded() {
-	//	Util.attemptModule('chat/moderator');
-	//	Util.attemptModule('chat/settings');
-	//}
-} else {
-	if(env.has_chat) {
-		Util.attemptModule('chat/emotes');
-		Util.attemptModule('chat/moderator');
-		Util.attemptModule('chat/settings');
-	}
-}

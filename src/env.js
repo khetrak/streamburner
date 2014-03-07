@@ -5,8 +5,8 @@ var logger = require('./logger');
 
 var Env = function() {
 	this.is_twitch = false;
-	this.has_chat = false;
 	this.has_body = false;
+	this.callbacks = {};
 }
 Env.prototype.detect = function() {
 	var loc = document.URL.toLowerCase();
@@ -44,17 +44,40 @@ Env.prototype.detectOnReady = function() {
 		logger.log("Load Aborted - jQuery isn't here, so this page probably isn't content");
 		return false;
 	}
-
+	return true;
+}
+Env.prototype.startLoop = function() {
 	var $ = require('./jquery');
 
-	this.has_chat = false;
-	logger.log($('#chat_lines,.chat-messages'));
-	if($('#chat_lines,.chat-messages').length) {
-		this.has_chat = true;
-		logger.log("Detected chat");
+	var self = this;
+	function detectChat() {
+		var mode = '';
+		if($('.ember-chat').length) {
+			mode = 'ember';
+		} else if($('#chat_lines').length) {
+			mode = 'legacy';
+		}
+		
+		if(!mode) {
+			setTimeout(detectChat,500);
+		} else {
+			logger.log("Detected chat mode loaded: "+mode);
+			self.emit('chat_load',mode);
+		}
 	}
-	
-	return true;
+	detectChat();
+}
+Env.prototype.on = function(type,func) {
+	if(!(type in this.callbacks)) this.callbacks[type] = [];
+	this.callbacks[type].push(func);
+}
+Env.prototype.emit = function(type) {
+	if(!(type in this.callbacks)) return;
+	var args = Array.prototype.slice.call(arguments);
+	args.shift();
+	for(var i = 0; i < this.callbacks[type].length; i++) {
+		this.callbacks[type][i].apply(undefined,args);
+	}
 }
 
 module.exports = new Env();

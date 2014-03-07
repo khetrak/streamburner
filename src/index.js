@@ -12,6 +12,7 @@ jquery.load(function($) {
 		logger.log("Sleeping for one tick");
 		setTimeout(function() {
 			require('./run');
+			env.startLoop();
 		},0);
 	}
 

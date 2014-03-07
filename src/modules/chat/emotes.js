@@ -23,10 +23,7 @@ function regexQuote(str)
 
 
 
-function injectOld() {
-
-	if(typeof window.CurrentChat === 'undefined')
-		throw new Error();
+function injectLegacy() {
 
 	function smilize_pre(message)
 	{
@@ -66,11 +63,17 @@ function injectOld() {
 	});
 }
 
-function injectNew() {
-	var emoticonsController = window.App.__container__.lookup('controller:emoticons');
-	var emoteSets = emoticonsController.emoticonSets;
-	var defaultSet = emoteSets['default'];
-	if(!defaultSet) throw new Error('Default emote set not loaded');
+function injectEmber() {
+	try {
+		var emoticonsController = window.App.__container__.lookup('controller:emoticons');
+		var emoteSets = emoticonsController.emoticonSets;
+		var defaultSet = emoteSets['default'];
+		if(!defaultSet) throw new Error('Default emote set not loaded');
+	} catch(e) {
+		logger.log('Waiting for deafult emotes to download...');
+		setTimeout(injectEmber,500);
+		return;
+	}
 	
 	var style = '';
 
@@ -78,14 +81,14 @@ function injectNew() {
 		var text = smile_list[i][0];
 		var url = smile_base+smile_list[i][1]+'.png';
 		var classname = 'emo-sb-'+i;
-		style += '.'+classname+' { background-image: url('+url+'); height: 28px; width: 28px; margin: -5px 0; } ';
+		style += '.'+classname+' { background-image: url('+url+'); height: 24px; width: 24px; margin: -5px 0; background-size: contain; } ';
 
 		if(!(text instanceof Array)) text = [text];
 		for(var j = 0; j < text.length; j++) {
 			var regex = text[j];
 			if(!(regex instanceof RegExp)) regex = new RegExp('\\b'+regexQuote(regex)+'\\b', 'g');
 
-			defaultSet.push({
+			defaultSet.unshift({
 				cls: classname,
 				isEmoticon: true,
 				regex: regex
@@ -97,12 +100,9 @@ function injectNew() {
 	logger.log('Emoticons injected with new method');
 }
 
-function inject() {
-	try { return injectOld(); } catch(e) {}
-	try { return injectNew(); } catch(e) {}
-
-	logger.log('Waiting...');
-	setTimeout(inject,500);
-}
-
-module.exports = inject;
+module.exports = function() {
+	env.on('chat_load', function(mode) {
+		if(mode === 'legacy') injectLegacy();
+		if(mode === 'ember') injectEmber();
+	});
+};
