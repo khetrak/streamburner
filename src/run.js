@@ -28,7 +28,6 @@ if(env.has_body) {
 
 Util.attemptModule('chat/emotes');
 Util.attemptModule('chat/moderator');
-if(env.chat_mode === 'legacy')
-	Util.attemptModule('chat/settings');
+Util.attemptModule('chat/settings');
 if(env.is_twitch)
 	Util.attemptModule('twitch/dark_mode');

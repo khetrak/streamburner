@@ -59,6 +59,7 @@ function inject(mode) {
 
 	Util.attempt('prevent_clear',function() {
 		if(mode === 'ember') {
+			window.App.Room.prototype._sbClearMessages = window.App.Room.prototype.clearMessages;
 			Util.inject(window.App.Room.prototype,'clearMessages',function(old,args) {
 				var from = args[0]
 				if(from) {
