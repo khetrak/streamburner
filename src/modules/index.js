@@ -12,5 +12,6 @@ module.exports = {
 	'clearout': require('./clearout'),
 	'over18_bypass': require('./over18_bypass'),
 	'pro_upgrader': require('./pro_upgrader'),
-	'reduce_title': require('./reduce_title')
+	'reduce_title': require('./reduce_title'),
+	'legacy_chrome_alert': require('./legacy_chrome_alert')
 };

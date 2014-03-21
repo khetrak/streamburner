@@ -9,6 +9,7 @@ if(env.has_body) {
 	Util.attemptModule('clearout');
 	Util.attemptModule('brand');
 	Util.attemptModule('pro_upgrader');
+	Util.attemptModule('legacy_chrome_alert');
 	setTimeout(function() {
 		logger.log("CALL delayed");
 		Util.attemptModule('clearout');
