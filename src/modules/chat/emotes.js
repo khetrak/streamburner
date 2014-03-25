@@ -7,7 +7,7 @@ var smile_list = [
 	['sbTroll','trollface'],
 	[/D\:/g,'aww'],
 	[/\:D/g,'awesome'],
-	[/;\(/g,'cry'],
+	['sbCry','cry'],
 	['sbPuke','puke'],
 	['sbMoon','mooning'],
 	['sbPool','poolparty']
